@@ -26,7 +26,7 @@ class VideoRecorder:
             video_filename = f"video_{timestamp}.h264"
             print(f"Video Kaydı Başlatıldı: {video_filename}")
             try:
-                self.video_process = os.popen(f"libcamera-vid -o {video_filename} -t 10000")
+                self.video_process = os.popen(f"libcamera-vid -o {video_filename} -t 0")
             except Exception as e:
                 print(f"Video başlatılamadı: {e}")
         else:
@@ -50,7 +50,7 @@ def main():
     video_recorder = VideoRecorder()
     
     video_recorder.start_recording()
-    time.sleep(5)
+    time.sleep(10)
     video_recorder.stop_recording()
      
 if __name__ == "__main__":
