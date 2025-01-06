@@ -57,7 +57,6 @@ def main():
     
     if time_elapsed >= 10:  # 10 saniye geçtiyse
         video_recorder.stop_recording()
-        break
      
 if __name__ == "__main__":
     main()
