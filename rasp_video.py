@@ -1,6 +1,7 @@
 import time
 import os
 from datetime import datetime
+import subprocess
 
 class VideoRecorder:
     def __init__(self):
@@ -25,7 +26,12 @@ class VideoRecorder:
             video_filename = f"video_{timestamp}.h264"
             print(f"Video Kaydı Başlatıldı: {video_filename}")
             try:
-                self.video_process = os.popen(f"libcamera-vid -o {video_filename} -t 0")
+                # Süresiz kayıt için libcamera-vid komutunu başlat
+                self.video_process = subprocess.Popen(
+                    ["libcamera-vid", "-o", video_filename, "-t", "0"],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE
+                )
             except Exception as e:
                 print(f"Video başlatılamadı: {e}")
         else:
@@ -34,9 +40,11 @@ class VideoRecorder:
     def stop_recording(self):
         if self.video_process is not None:
             # Video kaydını durdurma
-            print("Video Kaydı Durduruldu.")
+            print("Video Kaydı Durduruluyor...")
             try:
-                self.video_process.close()
+                self.video_process.terminate()  # İşlemi sonlandır
+                self.video_process.wait()      # İşlemin tamamen kapandığından emin ol
+                print("Video Kaydı Durduruldu.")
             except Exception as e:
                 print(f"Video durdurulamadı: {e}")
             finally:
