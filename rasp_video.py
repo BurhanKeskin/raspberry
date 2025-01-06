@@ -2,7 +2,6 @@ import time
 import os
 from datetime import datetime
 
-
 class VideoRecorder:
     def __init__(self):
         self.video_process = None  # Video sürecinin durumu
@@ -53,10 +52,12 @@ def main():
     
     video_recorder.start_recording()
 
-    time_elapsed = int(time.time() - start_time)
-    
-    if time_elapsed >= 10:  # 10 saniye geçtiyse
-        video_recorder.stop_recording()
-     
+    while True:
+        time_elapsed = int(time.time() - start_time)
+        
+        if time_elapsed >= 10:  # 10 saniye geçtiyse
+            video_recorder.stop_recording()
+            break
+ 
 if __name__ == "__main__":
     main()
