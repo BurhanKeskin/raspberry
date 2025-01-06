@@ -49,9 +49,15 @@ def main():
 
     video_recorder = VideoRecorder()
     
+    start_time = time.time()
+    
     video_recorder.start_recording()
-    time.sleep(10)
-    video_recorder.stop_recording()
+
+    time_elapsed = int(time.time() - start_time)
+    
+    if time_elapsed >= 10:  # 10 saniye geçtiyse
+        video_recorder.stop_recording()
+        break
      
 if __name__ == "__main__":
     main()
