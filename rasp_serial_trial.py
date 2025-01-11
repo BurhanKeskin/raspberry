@@ -6,8 +6,6 @@ import os
 from datetime import datetime
 import subprocess
 
-from rasp_estimation import speed_estimation
-
 
 class VideoRecorder:
     def __init__(self):
@@ -106,12 +104,6 @@ def main():
                         video_recorder.stop_recording()
                         time.sleep(5)
                         video_recorder.convertFromH264_to_MP4()
-                        time.sleep(5)
-                        try:
-                            speed_estimation(video_recorder.mp4_file, video_recorder.outputVideo)
-                        except Exception as e:
-                            print(f"Hız tahmini sırasında hata oluştu: {e}")
-
                     else:
                         print(f"Tanımlanamayan Komut: {command}")
                     previous_command = command     # Önceki komutu güncelle
