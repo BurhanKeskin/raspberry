@@ -5,13 +5,15 @@ import time
 import os
 from datetime import datetime
 import subprocess
+import getpass
 
+user = os.getenv("USER") or getpass.getuser()
 
 class VideoRecorder:
     def __init__(self):
         self.video_process = None  # Video sürecinin durumu
 
-        self.video_dir = f"/home/{os.getlogin()}/Videolar"
+        self.video_dir = f"/home/{user}/Videolar"
         if not os.path.exists(self.video_dir):
             os.makedirs(self.video_dir)
         
@@ -59,9 +61,9 @@ class VideoRecorder:
     
     def convertFromH264_to_MP4(self):
         
-        h264_file = f"/home/{os.getlogin()}/Videolar/{self.video_filename}"
-        self.mp4_file = f"/home/{os.getlogin()}/Videolar/video_{self.timestamp}.mp4"
-        self.outputVideo = f"/home/{os.getlogin()}/Videolar/video_{self.timestamp}_processed.mp4"
+        h264_file = f"/home/{user}/Videolar/{self.video_filename}"
+        self.mp4_file = f"/home/{user}/Videolar/video_{self.timestamp}.mp4"
+        self.outputVideo = f"/home/{user}/Videolar/video_{self.timestamp}_processed.mp4"
         
 
         try:
